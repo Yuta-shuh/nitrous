@@ -1,3 +1,9 @@
-すごい！見れる！！しかも日本語もかける！
+<html>
+<head>
+	<title>雑多</title>
+</head>
+<body>
+<a href="prepare.html">プリペア変換器</a>
 
-<?php phpinfo();
+</body>
+</html>

@@ -1,0 +1,60 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<script type="text/javascript">
+<!--
+function func() { var sql = document.form.sql.value; var params = document.form.parameter.value.split(",");
+
+var countHatena = stringCounter(sql, "?");
+var countParam = params.length;
+sql = sql.replace(/.*Statement:/, "");
+for(var i in params){
+	params[i] = params[i].replace(/(^\s+)|(\s+$)/g, "");
+	if (params[i] == "null") {
+		sql = sql.replace(/\?/, params[i]); 
+	} else {
+		sql = sql.replace(/\?/, "'" + params[i] + "'");
+	}
+}
+
+document.form.result.value = sql;
+var msg = "";
+if (countHatena != countParam) {
+	msg = "注意！ " + countHatena + " / " + countParam 
+} else {
+	msg = "OK"; 
+}
+document.getElementById("msg").innerText = msg;
+
+// 関数名:  stringCounter
+// 機能  :  ある文字列の中に指定した文字列がいくつあるか調べる
+// 引数１:  調べたい文字列全体
+// 引数２:  数えたい文字列
+// 返値  :  引数１内に引数２が含まれていた数
+function stringCounter(str1,str2){
+	var strlength=str2.length;  
+	var ans=0;  
+	var i=0;  
+	while((i=str1.indexOf(str2,i)) != -1) {    
+		i+=strlength; 
+		//この行は目的によってはi++;を使う
+	    ans++;  
+	    }  
+	    return ans;
+	}
+}
+// -->
+</script>
+</head>
+<body>
+<h1>プリペア変換器 (Only Javascript)</h1>
+<form name="form" action="#">
+	SQL<br />
+	<textarea rows="15" cols="200" name="sql"></textarea><br />
+	パラメータ<br />
+	<textarea rows="15" cols="200" name="parameter"></textarea> <br />
+	<input type="button" value="変換" onclick="func()" /> 変換後 <b id="msg"></b><br />
+	<textarea rows="15" cols="200" name="result"></textarea>
+</form>
+</body>
+</html>
